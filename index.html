@@ -1,14 +1,18 @@
 <html>
-<head>
 
+<head>
+<title>Bastián Matamala</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
 <link rel="stylesheet" type="text/css" href="assets/css/theme.css">
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/3.0.0/css/ionicons.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="scripts.js"></script>
 </head>
 
 <body data-spy="scroll" data-target="#navbar1" data-offset="60">
+  <!-- Header -->
   <header class="bg-primary">
        <div class="container h-100">
            <div class="row h-50">
@@ -30,6 +34,42 @@
            </div>
        </div>
    </header>
+
+   <!-- Navbar -->
+   <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary" id="navbar1">
+        <div class="container">
+            <a class="navbar-brand mr-1 mb-1 mt-0" href="../">BM</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="navbar-collapse collapse justify-content-center" id="collapsingNavbar">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#sobremi">Sobre mí</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#proyectos">Proyectos</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- About me -->
+    <section class="container pb-5 mt-5" id="sobremi">
+      <div class="d-flex my-3">
+                <div class="jumbotron w-100 py-5 mx-auto">
+                    <h1>Sobre mí</h1>
+                    <h4>21 años, Santiago de Chile.</h4>
+                    <p class="lead">
+                        Originario de Puerto Montt, voy en quinto año de la carrera de Ing. Civil en Computación de la <a class="font-weight-bold" href="www.dcc.uchile.cl">Universidad de Chile</a>.
+                        Actualmente aficionado a los datos, las estadísticas y el machine learning.
+                       <br> En mi tiempo libre un asiduo consumidor de películas, series y videojuegos.
+                    </p>
+                </div>
+            </div>
+    </section>
+
 </body>
 
 </html>
