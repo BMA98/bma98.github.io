@@ -1,0 +1,192 @@
+:root {
+  --bg: #121212;
+  --fg: #ffffff;
+  --muted: rgba(255, 255, 255, 0.7);
+  --line: rgba(255, 255, 255, 0.12);
+  --accent: #ffffff;
+}
+
+* { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+               Helvetica, Arial, sans-serif;
+  line-height: 1.6;
+  font-size: 16px;
+}
+
+/* Each section fills the viewport but grows if the content is taller. */
+.screen {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 1.25rem;
+  gap: 1.5rem;
+}
+
+.avatar {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+}
+
+h1 {
+  font-size: 1.25rem;
+  font-weight: 500;
+  margin: 0;
+  text-align: center;
+}
+
+h2 {
+  font-size: 1.25rem;
+  font-weight: 500;
+  margin: 0 0 1.5rem;
+  text-align: center;
+}
+
+.bio {
+  max-width: 700px;
+  margin: 0;
+  padding: 1rem 1.25rem;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  color: var(--muted);
+  text-align: left;
+}
+
+/* Profile links */
+.social {
+  display: flex;
+  gap: 2.5rem;
+}
+
+.social a {
+  display: inline-flex;
+  padding: 0.5rem;
+  color: var(--muted);
+  border-radius: 50%;
+  transition: color 0.2s, background-color 0.2s;
+}
+
+.social a:hover,
+.social a:focus-visible {
+  color: var(--accent);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.social svg {
+  width: 36px;
+  height: 36px;
+  fill: currentColor;
+}
+
+/* Projects accordion */
+.projects { justify-content: flex-start; }
+
+.panel {
+  width: 100%;
+  max-width: 900px;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.panel summary {
+  cursor: pointer;
+  padding: 1rem 1.25rem;
+  font-weight: 700;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.panel summary::-webkit-details-marker { display: none; }
+
+/* Chevron that flips when the panel opens. */
+.panel summary::after {
+  content: "";
+  width: 0.5rem;
+  height: 0.5rem;
+  margin-left: 1rem;
+  border-right: 2px solid var(--muted);
+  border-bottom: 2px solid var(--muted);
+  transform: rotate(45deg);
+  transform-origin: center;
+  transition: transform 0.2s;
+  flex: none;
+}
+
+.panel[open] summary::after { transform: rotate(-135deg); }
+
+.panel summary:hover { background: rgba(255, 255, 255, 0.04); }
+
+.panel-body {
+  padding: 0 1.25rem 1rem;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+}
+
+.panel-body p { margin: 1rem 0; }
+
+.panel-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+}
+
+.panel-actions a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  color: var(--fg);
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  transition: background-color 0.2s;
+}
+
+.panel-actions a:hover,
+.panel-actions a:focus-visible { background: rgba(255, 255, 255, 0.08); }
+
+.panel-actions svg {
+  width: 24px;
+  height: 24px;
+  fill: currentColor;
+}
+
+/* Push the demo link to the far side, as in the original layout. */
+.panel-actions .demo { margin-left: auto; }
+
+/* 404 */
+.notfound {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 1.25rem;
+}
+
+.notfound a { color: var(--fg); }
+
+@media (max-width: 480px) {
+  .social { gap: 1.5rem; }
+  .panel-actions .demo { margin-left: 0; }
+}
