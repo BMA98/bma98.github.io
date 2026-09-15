@@ -20,6 +20,48 @@ body {
   font-size: 16px;
 }
 
+/* Language toggle, fixed to the corner so it is reachable from any section. */
+.lang {
+  position: fixed;
+  top: 1rem;
+  right: 1.25rem;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  padding: 0.125rem;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  background: var(--bg);
+  font-size: 0.875rem;
+  letter-spacing: 0.05em;
+}
+
+.lang a,
+.lang span {
+  padding: 0.25rem 0.5rem;
+  text-decoration: none;
+}
+
+.lang a {
+  color: var(--muted);
+  border-radius: 4px;
+  transition: color 0.2s, background-color 0.2s;
+}
+
+.lang a:hover,
+.lang a:focus-visible {
+  color: var(--accent);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* The language already being shown is plain text, not a link to itself. */
+.lang [aria-current] { color: var(--fg); }
+
+.lang .sep {
+  padding: 0;
+  color: var(--line);
+}
+
 /* Each section fills the viewport but grows if the content is taller. */
 .screen {
   min-height: 100vh;
@@ -183,6 +225,8 @@ h2 {
   gap: 1rem;
   padding: 1.25rem;
 }
+
+.notfound p { margin: 0; }
 
 .notfound a { color: var(--fg); }
 
