@@ -1,9 +1,49 @@
 ---
-name: pr-and-commits
-description: How I write commit messages and pull request descriptions — Conventional Commits, and PR bodies that say what was done instead of restating the diff. Apply when writing a commit, opening a PR, or editing a PR description.
+name: git-workflow
+description: How I work in git — a worktree per task, Conventional Commits, and PR bodies that say what was done instead of restating the diff. Apply before starting work on a task, and when writing a commit, opening a PR, or editing a PR description.
 ---
 
-# Commits and pull requests
+# Git workflow
+
+## Work in a worktree, not in the main checkout
+
+The primary checkout is mine. I switch branches in it while a session is running, without saying
+so. A session that assumes the branch it checked out is still the branch it is on will commit
+somewhere unintended, and the failure is silent — `git commit` succeeds, the push reports
+"Everything up-to-date", and the mistake only surfaces later when the PR has nothing in it.
+
+So take a worktree per task. It is a separate directory with its own checked-out branch, sharing
+one object store, so my branch switching cannot reach it.
+
+```sh
+git worktree add ../bma98.github.io-<task> -b <branch> origin/master
+```
+
+Work there for the whole task: edit, commit, push, open the PR. When it is merged:
+
+```sh
+git worktree remove ../bma98.github.io-<task>
+git branch -d <branch>
+```
+
+`git worktree list` shows what is currently checked out where. A branch can only be checked out in
+one worktree at a time, which is the property doing the work here.
+
+In Claude Code, `isolation: "worktree"` on a subagent gives that agent its own worktree and cleans
+it up if nothing changed. There are also `EnterWorktree` and `ExitWorktree` tools for moving the
+current session into one.
+
+### If you are in the main checkout anyway
+
+Branch the task first, and **verify the branch immediately before every commit and push**:
+
+```sh
+git branch --show-current
+```
+
+Never infer the current branch from a `checkout` earlier in the session. That inference is exactly
+what breaks. If a commit lands in the wrong place, the fix is `git branch -f <intended> <sha>` and
+then resetting the branch that wrongly received it.
 
 ## Commits: Conventional Commits
 
@@ -81,3 +121,11 @@ no structural changes.
 ```
 
 Not a before-and-after of both paragraphs, and not a bullet arguing why a date was left out.
+
+## Merging
+
+I merge my own PRs. Do not merge without being asked.
+
+A PR merged from the GitHub UI takes whatever is on the branch **at that moment**. If a session
+pushes more commits after I have merged, they are stranded on a dead branch and need a fresh PR, so
+push before saying the work is ready rather than after.
