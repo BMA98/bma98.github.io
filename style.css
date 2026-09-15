@@ -20,47 +20,82 @@ body {
   font-size: 16px;
 }
 
-/* Language toggle, fixed to the corner so it is reachable from any section. */
+/* Language dropdown, fixed to the corner so it is reachable from any section.
+   A <details> for the same reason the project panel is one: it opens without
+   JavaScript, and it takes a third language as one more list item. */
 .lang {
   position: fixed;
   top: 1rem;
   right: 1.25rem;
   z-index: 1;
-  display: flex;
-  align-items: center;
-  padding: 0.125rem;
-  border: 1px solid var(--line);
-  border-radius: 4px;
-  background: var(--bg);
   font-size: 0.875rem;
   letter-spacing: 0.05em;
 }
 
-.lang a,
-.lang span {
-  padding: 0.25rem 0.5rem;
-  text-decoration: none;
-}
-
-.lang a {
-  color: var(--muted);
+.lang summary {
+  cursor: pointer;
+  list-style: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0.6rem;
   border-radius: 4px;
+  color: var(--muted);
   transition: color 0.2s, background-color 0.2s;
 }
 
-.lang a:hover,
-.lang a:focus-visible {
+.lang summary::-webkit-details-marker { display: none; }
+
+.lang summary:hover,
+.lang summary:focus-visible {
+  color: var(--accent);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* The same chevron the project panel uses. */
+.lang summary::after {
+  content: "";
+  width: 0.4rem;
+  height: 0.4rem;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: rotate(45deg) translate(-2px, -2px);
+  transition: transform 0.2s;
+  flex: none;
+}
+
+.lang details[open] summary::after { transform: rotate(-135deg); }
+
+/* Anchored to .lang, which is the positioned ancestor. */
+.lang ul {
+  position: absolute;
+  right: 0;
+  min-width: 8.5rem;
+  margin: 0.35rem 0 0;
+  padding: 0.25rem;
+  list-style: none;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  background: var(--bg);
+}
+
+.lang li a,
+.lang li span {
+  display: block;
+  padding: 0.4rem 0.6rem;
+  border-radius: 3px;
+  text-decoration: none;
+  color: var(--muted);
+}
+
+.lang li a:hover,
+.lang li a:focus-visible {
   color: var(--accent);
   background: rgba(255, 255, 255, 0.08);
 }
 
 /* The language already being shown is plain text, not a link to itself. */
-.lang [aria-current] { color: var(--fg); }
-
-.lang .sep {
-  padding: 0;
-  color: var(--line);
-}
+.lang li [aria-current] { color: var(--fg); }
 
 /* Each section fills the viewport but grows if the content is taller. */
 .screen {
